@@ -3,17 +3,17 @@ Information on how to create a mongodb Docker image which correctly initialized 
 
 read a lot of instructions, but none fully worked for me, so i hacked together this example which now does what i want
 
-put the data you want to import (which needs to be generated with mongodump command) into
+## Howto
+1. put the data you want to import (which needs to be generated with mongodump command) into
 ```
 ./mongo-seed-data
 ```
-change the target database (myawesomedb) you want to import to in
+2. change the target database (myawesomedb) you want to import to in
 ```
 ./mongodb-scripts/seed.sh
 
 ```
-
-finally run docker compose to do the jobn
+3. finally run docker compose to do the jobn
 ```
 docker-compose up
 ```
