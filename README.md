@@ -8,7 +8,7 @@ read a lot of instructions, but none fully worked for me, so i hacked together t
 ```
 ./mongo-seed-data
 ```
-2. change the target database (myawesomedb) you want to import to in
+2. change the target mongodb database name (myawesomedb) you want to import to in
 ```
 ./mongodb-scripts/seed.sh
 
@@ -68,12 +68,12 @@ echo "Mongo users created."
 ```
 
 
-Everytime you need to seed a mongodb data you need to make sure to remove the 
-mongodb-volume, otherwise the docker-entrypoint-initdb.d does not get executed!
+Everytime you need to seed a mongodb database you need to make sure to remove the 
+mongodb-volume, otherwise the import (in detail the scripts residing in docker-entrypoint-initdb.d) do not get executed!
 
 ## Testdrive stuff:
 
-First create a valid mongodb database dump from some test data
+First create a valid mongodb database dump (with mongodump) from some test data
 ```bash
 mkdir /tmp/json-import
 # optionally: remove any former dump data for this test
@@ -87,12 +87,12 @@ docker kill $DOCKER_TMP_IMPORT_PROCESS
 mv $PWD/mongo-seed-data/mydb/* $PWD/mongo-seed-data/ && rmdir $PWD/mongo-seed-data/mydb
 ```
 
-# now use this dump with our docker-compose setup
+### now use this dump with our docker-compose setup
 ```bash
 # first remove all existing volumes, otherwise the init scripts will not fire!, do this every time you need to init something new
 docker-compose down -v
 
-# now start the import ;)
+### now start the import ;)
 docker-compose up
 ```
 you should see something like the following in the log out
@@ -105,7 +105,8 @@ mongo.db_1  | data imported
 
 ```
 
-# test if data has been successfully imported (open in another window in same dir) 
+### test if data has been successfully imported (open in another window in same dir) 
+```bash
 docker-compose exec mongo.db /bin/bash -c "mongo -u mongoadmin -p mypass  myawesomedb --authenticationDatabase admin --eval 'db.restaurants.find();'"
 ```
 
