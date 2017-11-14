@@ -1,7 +1,27 @@
 # Instructions to build a mongodb docker image which correctly can init or seed a database
 Information on how to create a mongodb Docker image which correctly initialized or seeds a database (using Docker compose)
 
-read a lot of instructions, but none fully worked for me
+read a lot of instructions, but none fully worked for me, so i hacked together this example which now does what i want
+
+put the data you want to import (which needs to be generated with mongodump command) into
+```
+./mongo-seed-data
+```
+change the target database (myawesomedb) you want to import to in
+```
+./mongodb-scripts/seed.sh
+
+```
+
+finally run docker compose to do the jobn
+```
+docker-compose up
+```
+
+
+
+
+## Files and test
 
 docker-compose.yml
 
