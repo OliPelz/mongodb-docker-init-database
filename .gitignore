@@ -1,1 +1,3 @@
-mongo-seed-data/
+mongo-seed-data/*.bson
+mongo-seed-data/*.json
+
