@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongo.db:
+        image: mongo:latest
+        environment:
+                 # provide your credentials here
+                 - MONGO_INITDB_ROOT_USERNAME=mongoadmin
+                 - MONGO_INITDB_ROOT_PASSWORD=mypass
+        ports:
+           - "27017"
+        volumes:
+           # to make a persistent database surviving docker restarts
+           - mongodb-volume:/data/db
+           # mongodump'ed data goes here
+           - ./mongo-seed-data:/data/mongo-seed-data
+           # script to start the actual import (besides other custom things
+           # you may want to do
+           - ./mongodb-scripts:/docker-entrypoint-initdb.d
+volumes:
+        mongodb-volume:
+
